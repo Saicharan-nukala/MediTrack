@@ -1,0 +1,352 @@
+.report-container {
+    max-width: 70vw;
+    margin: 30px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Title */
+.report-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Form Sections */
+.form-section {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Labels */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #34495e;
+}
+
+/* Input Fields */
+.input-field {
+    width: 95%;
+    margin: 3px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Text Area */
+.text-area {
+    width: 95%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    resize: none;
+}
+
+/* From Uiverse.io by Pradeepsaranbishnoi */
+.mydict {
+    height: auto;
+    /* Allow content to define height */
+}
+
+.mydict div {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+}
+
+/* Hide default radio button */
+.mydict input[type="radio"] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+/* Styling for selected radio */
+.mydict input[type="radio"]:checked+span {
+    box-shadow: 0 0 0 0.0625em #7aa39e;
+    background-color: #dee7ff;
+    z-index: 1;
+    color: black;
+}
+
+/* Increase height */
+label span {
+    display: block;
+    cursor: pointer;
+    background-color: #fff;
+    padding: 0.5em 1em;
+    /* Increased padding for height */
+    position: relative;
+    margin-left: 0.0625em;
+    box-shadow: 0 0 0 0.0625em #b5bfd9;
+    letter-spacing: 0.05em;
+    color: #3e4963;
+    text-align: center;
+    font-size: 0.7rem;
+    /* Increase font size */
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+/* Rounded corners for first and last elements */
+label:first-child span {
+    border-radius: 0.5em 0 0 0.5em;
+}
+
+label:last-child span {
+    border-radius: 0 0.5em 0.5em 0;
+}
+
+
+
+.medication-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.medication-table th,
+.medication-table td {
+    border: 1px solid #ddd;
+    background-color: #ccece8;
+    padding: 3px;
+    text-align: center;
+}
+
+.medi-input {
+    width: 80%;
+    margin: 2px;
+    padding: 2px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.medication-table th {
+    background: #649cac;
+    color: white;
+}
+
+/* Add Button */
+.add-btn {
+    background: #649cac;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.remove-btn {
+    background: #e74c3c;
+    margin-left: 5px;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 5px;
+}
+
+.add-btn:hover {
+    background: #7aa39e;
+}
+
+.remove-btn:hover {
+    background: #c0392b;
+}
+
+
+/* Button */
+.report-btn {
+    width: 100%;
+    padding: 12px;
+    background: #649cac;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.report-btn:hover {
+    background: #7aa39e;
+}
+
+.pnameage {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+
+}
+
+.pnameage div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pnameage input {
+    width: 40%;
+    justify-self: center;
+    align-items: center;
+}
+
+.mardiag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3vw;
+}
+
+.mardiag div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mardiag input {
+    width: 20%;
+    justify-self: center;
+    align-items: center;
+}
+
+.appo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.appo div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.appo input {
+    width: 20%;
+    justify-self: center;
+    align-items: center;
+}
+
+.sym-div-tab {
+    border-radius: 10px;
+}
+
+.sym-table {
+    width: 60%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.sym-table th,
+.sym-table td {
+    border: 1px solid #ddd;
+    background-color: #ccece8;
+    padding: 3px;
+    text-align: center;
+}
+
+.sym-input {
+    width: 100%;
+    /* Ensure it takes the full width */
+    padding: 5px;
+    border: #649cac;
+    background-color: #ccece8;
+    border-radius: 5px;
+    font-size: 14px;
+    text-align: center;
+    /* Center the text inside the input */
+    display: block;
+    /* Ensures it aligns properly inside the cell */
+    margin: auto;
+    /* Centers the input itself in the cell */
+}
+
+.sym-table th {
+    background: #649cac;
+    color: white;
+}
+
+.custom-fields-container {
+    margin-top: 15px;
+    align-items: center;
+}
+
+.custom-field {
+    display: flex;
+
+    align-items: center;
+    gap: 5px;
+    margin-bottom: -7px;
+}
+
+.input-field {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 20%;
+    text-align: center;
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.doctor-info,
+.clinic-info {
+    width: 40%;
+}
+
+.clinic-logo img {
+    height: 60px;
+    /* Adjust as needed */
+}
+
+h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+p {
+    margin: 2px 0;
+    font-size: 14px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid black;
+    margin-top: 5px;
+}
+
+.file-input {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+}

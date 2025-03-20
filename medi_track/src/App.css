@@ -1,0 +1,651 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* Theam COlor : - #ccece8 */
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins',sans-serif;
+}
+/* Logo styling */
+/* Logo styling */
+.logonav {
+  height: 8vh;
+  width: 8.5vw;
+  border-radius: 5px;
+  margin-left: 3vw;
+  transition: transform 0.3s ease; /* Add a hover effect */
+}
+
+.logonav:hover {
+  transform: scale(1.05); /* Slightly enlarge the logo on hover */
+}
+
+/* Navbar container */
+.navbar {
+  position: sticky;
+  top: 0;
+  height: 8vh;
+  width: 100vw;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #649cac; /* Original background color */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  padding: 10px 20px;
+}
+
+/* Navbar links container */
+.navlist {
+  margin-right: 5vw;
+}
+
+/* Navbar list styling */
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 25px; /* Slightly more spacing between items */
+}
+
+/* Navbar item styling */
+.nav-item {
+  padding: 10px 15px;
+  border-radius: 5px; /* Softer rounded corners */
+  position: relative;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white background on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Navbar link styling */
+.nav-link {
+  text-decoration: none;
+  color: #ffffff; /* White text for better contrast */
+  font-weight: 600; /* Semi-bold for better readability */
+  font-size: 1rem; /* Slightly larger font size */
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #f0f8ff; /* Light blue on hover for a soft effect */
+}
+
+/* Active link underline effect */
+.nav-item.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff; /* White underline for active link */
+  transition: width 0.3s ease-in-out;
+}
+
+/* Optional: Add a smooth fade-in animation for the navbar */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.homemain{
+  /* background-color:aliceblue; */
+  height: 80vh;
+  border-radius: 10px;
+  margin: 3vh 5vw;
+  padding: 2vh 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* box-shadow: 5px 5px 10px #ccece8; */
+}
+.leftmain
+{
+  width: 40vw;
+  height: 75vh;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+.maindiv{
+  height: 60vh;
+  margin-left: 3vw;
+  margin-right: 3vw;
+  opacity: 0.5;
+  border-radius: 2px;
+  background-color: #649cac;
+  width: 2px;
+}
+.rightmain{
+  width: 40vw;
+  height: 75vh;
+  background-color: #d9ebec;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+  background-image: url('images/wave.svg'); /* Replace with your image URL */
+  background-size: cover;   /* Make the image cover the entire div */
+  background-position: center; /* Center the image */
+}
+.heading
+{
+  justify-content: space-around;
+}
+.loginhead
+{
+  margin: 2vh;
+}
+.divider
+{
+  height: 2px;
+  width: 10vw;
+  background-color: black;
+}
+.details
+{
+  height: 30vh;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5vh;
+}
+.details label
+{
+  font-weight: bold;
+}
+.details div{
+  height: 5vh;
+  width: 30vw;
+  display: flex;
+  justify-content: space-between;
+}
+.details div input{
+  width: 20vw;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 10px 10px 20px;
+}
+
+.details div select{
+  width: 20vw;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 10px 10px 20px;
+}
+.loginbtn
+{
+  height: 5vh;
+  width: 10vw;
+  border-radius: 5px;
+  border: none;
+}
+.loginbtn:hover{
+  cursor: pointer;
+}
+.footer {
+  height: 3vh;
+  width: 100vw;
+  display: flex;
+  background-color: #649cac;
+  justify-content: center;
+  align-items: center;
+  text-align: "center";
+  padding: "15px";
+  color: "white";
+}
+/* Doctor - Patients  CSS */
+
+.bodymain
+{
+  background-color: #f3fffe;
+  /* background-color: aliceblue; */
+
+}
+.maincontainer
+{
+  height: 100vh;
+  margin: 0vw 5vh;
+  padding-top: 1vh;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+}
+.patientlist
+{
+  /* background-color: aquamarine; */
+  width: 25vw;
+  padding: 3vh;
+  border-radius: 5px;
+}
+.patientlist ul{
+  list-style: none;
+  overflow-y: auto;
+  max-height: 80vh;
+  border-radius: 5px;
+  background-color: #e4f5f3;
+  border: 1px solid #ccece8;
+}
+.patient-item{
+  padding: 2vh 3vh;
+  background-color: white;
+  border-bottom: 1px solid #d9ebec;
+  transition: background 0.2s ease-in-out;
+}
+.nopatientmsgleft{
+  font-weight: 700;
+  padding: 2vh 3vh;
+  background-color: white;
+  border-bottom: 1px solid #d9ebec;
+}
+.nopatientmsgright{
+  font-weight: 700;
+  padding: 2vh 3vh;
+  background-color: white;
+}
+.patientlist ul li:hover{
+cursor: pointer;
+background-color: #ccece8;
+}
+/* .selected-patient{
+  background-color: #ccece8; 
+} */
+.patientdetails
+{
+  /* background-color: beige; */
+  margin-top: 4.5vh;
+  padding: 3vh;
+  width: 65vw;
+}
+.detailsdivider{
+  width: 2px;
+  background-color: #649cac;
+  margin: 5vh 0;
+}
+.selectrecordimg{
+  height: 80vh;
+  width: 65vw;
+}
+.selectehr{
+  height: 7vh;
+  margin-right: 4vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ehrbtnsselect
+{
+  height: 5vh;
+  width:12vw;
+  margin-right: 30px;
+  border: none;
+  border-radius: 5px; 
+}
+.ehrbtnsselect
+{
+  cursor: pointer;
+}
+.viewehrbtn
+{
+  height: 5vh;
+  width: 7vw;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(200, 200, 200);
+}
+.viewehrbtn:hover{
+  cursor: pointer;
+}
+/* Doctor - Dashboard CSS */
+.dashmain
+{
+  height: 100vh;
+}
+.divgrid
+{
+  display: grid;
+  grid-template-rows: 40vh 40vh;
+  grid-template-columns: 45vw 45vw;
+  margin: 3vh 4vw;
+  gap: 1vw;
+}
+.grid-item
+{
+  background-color: white;  
+  border-radius: 5px;
+  padding: 2vh 2vw;
+  display: grid;
+  grid-template-rows: 12vh 12vh 12vh;
+}
+.in-grid-item
+{
+  background-color: white;
+  border-radius: 3px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-weight: 700;
+  gap: 10px;
+  padding: 2vh;
+}
+.i1
+{
+  border-bottom: 1px solid #d9ebec;
+}
+.i2
+{
+  border-bottom: 1px solid #d9ebec;
+}
+.colorhead
+{
+  color: #649cac;
+}
+.normalhead
+{
+  color: black;
+}
+.namehead
+{
+  display: flex;
+  justify-content: start;
+  gap: 5px;
+  margin: 3vh 3vw;
+}
+.todaypatientlistdash ul{
+  list-style: none;
+  overflow-y: auto;
+  max-height: 30vh;
+  border-radius: 5px;
+  border: 1px solid #ccece8;
+}
+.today-patient-item
+{
+  padding: 2vh 3vh;
+  background-color: white;
+  border-bottom: 1px solid #d9ebec;
+  transition: background 0.2s ease-in-out;
+}
+.today-patient-item:hover{
+  cursor: pointer;
+  background-color: #ccece8; 
+}
+.newpatientslist ul{
+  list-style: none;
+  overflow-y: auto;
+  max-height: 30vh;
+  border-radius: 5px;
+  border: 1px solid #ccece8;
+}
+.dashheading
+{
+  color: #649cac;
+}
+/* Doctor - Appointment */
+.appointmentmain
+{
+  height: 110vh;
+  background-color: #f3fffe;
+}
+.appointmentlist
+{
+  padding: 2vh 3vw;
+  border-radius: 5px;
+}
+.appointmentlist ul{
+  list-style: none;
+  max-height: 43vh;
+  overflow-y: scroll;
+  border-radius: 5px;
+  border: 1px solid #ccece8;
+}
+.list-item-struct
+{
+  display: grid;
+  grid-template-columns: 30vw 20vw 20vw 20vw;
+}
+.appointheading
+{
+  display: grid;
+  grid-template-columns: 43vw 6vw 15vw 6vw 15vw 5vw;
+  gap: 10px;
+  align-items: center;
+}
+.dateinput{
+  height: 4vh;
+  width: 15vw;
+  border-radius: 5px;
+  padding: 0.5vh;
+  border: 1px solid #ccece8;
+}
+.filterbtnappo{
+  width: 5vw;
+  height: 4vh;
+  border: none;
+  border: 1px solid #ccece8;
+  background-color: white;
+  margin: 1vw;
+  align-items: center;
+}
+.filterbtnappo:hover{
+  cursor: pointer;
+}
+.appolisttable{
+  display: grid;
+  grid-template-rows: 5vh 40vh;
+}
+.appolistheadrow{
+  display: grid;
+  background-color: #ccece8;
+  height: 6vh;
+  grid-template-columns: 30vw 20vw 20vw 20vw;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+.appolisthead{
+  font-weight: 600;
+  background-color: #ccece8;
+}
+.newpatientappo{
+  padding: 2vh 3vw;
+  border-radius: 5px;
+}
+.newpatientappo ul{
+  list-style: none;
+  overflow-y: auto;
+  max-height: 30vh;
+  border-radius: 5px;
+  border: 1px solid #ccece8;
+}
+
+/* Record */
+.recordcontainer{
+  height: 100vh;
+  width: 100vw;
+
+}
+.recordmain
+{
+  height: 100vh;
+  width: 100vw;
+  background-color: yellow;
+}
+
+.recordbody{
+  padding: 2vh;
+  margin: 2vh;
+  height: 95vh;
+  width: 95vw;
+  background-color: antiquewhite;
+}
+.reportcontainer{
+  display: flex;
+  justify-self: center;
+  align-items: center;
+}
+.recorddivider
+{
+  height: 80vh;
+  width: 2px;
+  margin: 2vh;
+  background-color: black;
+}
+.recordleftpatients
+{
+  width: 30vw;
+  height: 80vh;
+
+}
+.recordrightcontainer {
+  margin: 2vh;
+  width: 60vw;
+  min-height: 70vh;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  background-color: #e4f5f3;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  transition: height 0.3s ease-in-out;
+}
+
+.radioGroup{
+  display: flex;
+  align-items: center;
+  margin: 0.5vh;
+  gap: 13vw;
+}
+.radioGroup div{
+  display: flex;
+  gap: 10px;
+}
+
+.reporttable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  border: 1px solid black;
+}
+
+
+.roportform input[type="text"]
+{
+  border: none;
+} 
+.roportform textarea
+{
+  width: 80%; /* Full width */
+  min-height: 20px; /* Default height */
+  padding: 8px; /* Padding inside the box */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px; /* Slightly rounded corners */
+  font-size: 14px; /* Readable text size */
+  resize: vertical; /* Allow vertical resizing */
+  outline: none;
+}
+.roportform label{
+  font-weight: 500;
+}
+.reportbtn{
+  width: 10vw;
+  height: 3vh;
+  background-color: #ccece8;
+  border-radius: 5px;
+  border-color: wheat;
+}
+.formpname {
+  margin: 0.5vh;
+  display: flex;
+  align-items: center;
+  gap: 10vw;
+}
+.formpname input{
+  padding: 5px;
+  border-radius: 5px;
+}
+.formage
+{
+  margin: 0.5vh;
+  display: flex;
+  align-items: center;
+  gap: 15vw;
+}
+.formage input[type="number"] {
+  width: 5%; /* Full width */
+  padding: 5px; /* Padding inside the box */
+  border: none; /* Light gray border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 14px; /* Readable text size */
+  outline: none; /* Remove default outline */
+  text-align: center; /* Center align the number */
+}
+/* .formdetail{
+  margin: 0.5vh;
+  display: flex;
+  align-items: center;
+  gap: 15vw;
+} */
+.diagdetail{
+  margin: 0.5vh;
+  display: flex;
+  align-items: center;
+  gap: 12vw;
+}
+.diagdetail input{
+  padding: 5px;
+  border-radius: 5px;
+}
+.formtable {
+  width: 100%; /* Full width */
+  border-collapse: collapse; /* Remove default spacing */
+  margin-top: 10px;
+   /* Space above the table */
+   border-radius: 5px;
+}
+
+.formtable th, .formtable td {
+  border: 1px solid #ccc; /* Light gray border */
+  padding: 8px; /* Padding inside cells */
+  text-align: left; /* Align text to the left */
+}
+
+.formtable th {
+  background-color: #7aa39e; /* Green header background */
+  color: black; /* White text for header */
+  font-weight: bold;
+}
+
+.formtable tr:nth-child(even) {
+  background-color: #f2f2f2; /* Light gray background for alternate rows */
+}
+
+.formtable tr:hover {
+  background-color: #ddd; /* Highlight effect on hover */
+}
+
+.formtable input {
+  width: 80%; /* Full width input */
+  padding: 5px; /* Padding inside input */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 14px; /* Readable text */
+}
+/* Report form styles
+*/
