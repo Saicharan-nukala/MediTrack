@@ -6,6 +6,8 @@ const doctorSchema = new mongoose.Schema({
   password: String,
   specialization: String,
   experience: Number,
+  profilePic: String,
+  signature: String,
   patients: [{ type: mongoose.Schema.Types.ObjectId, ref: "Patient" }],
   appointments: [{ type: Date }]
 });

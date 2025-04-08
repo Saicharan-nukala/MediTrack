@@ -52,4 +52,21 @@ router.get("/:doctorId", async (req, res) => {
   }
 });
 
+// PUT route in doctorRoute.js
+router.put("/:doctorId", async (req, res) => {
+  try {
+    const updated = await Doctor.findByIdAndUpdate(req.params.doctorId, req.body, {
+      new: true,
+    });
+    if (!updated) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+    res.json(updated);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+
+
 module.exports = router;

@@ -5,6 +5,7 @@ import Patients from "./Patients";
 import Records from "./Records";
 import Appointments from "./Appointments";
 import PatientReportForm from "./PatientReportForm";
+import Profile from "./Profile";
 
 const DoctorMain = () => {
   const doctorNavItems = [
@@ -12,6 +13,7 @@ const DoctorMain = () => {
     { name: "Appointments", path: "/appointments" },
     { name: "Patients", path: "/patients" },
     { name: "Records", path: "/records" },
+    { name: "Profile", path: "/profile" },
   ];
   return (
     <Router>
@@ -23,6 +25,7 @@ const DoctorMain = () => {
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/patients" element={<Patients />} />
           <Route path="/records" element={<Records />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/report-form" element={<PatientReportForm />} />
         </Routes>
       </div>

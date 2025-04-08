@@ -35,3 +35,22 @@ const testFetchPatients = async () => {
 };
 
 testFetchPatients(); // Call function to check if it works
+export const updateDoctorDetails = async (doctorId, updatedData) => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/doctors/${doctorId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      });
+  
+      if (!res.ok) throw new Error("Failed to update doctor");
+  
+      return await res.json();
+    } catch (error) {
+      console.error("Update Error:", error);
+      return null;
+    }
+  };
+  
