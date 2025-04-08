@@ -8,7 +8,6 @@ const patientSchema = new mongoose.Schema({
     maritalStatus: { type: String, required: true },
     children: { type: Number, default: 0 },
     symptoms: { type: [String], default: [] },
-    
     firstAppointment: { type: Date, required: true },
     lastAppointment: { type: Date, required: true },
     nextAppointment: { type: Date, default: null },
