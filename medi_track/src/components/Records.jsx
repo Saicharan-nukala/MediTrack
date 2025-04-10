@@ -19,6 +19,7 @@ const Records = () => {
     setSelectedPatient(patient);
   };
 
+  
   const handleGenerateReport = () => {
     if (selectedPatient) {
       const patientData = encodeURIComponent(JSON.stringify(selectedPatient));
@@ -84,7 +85,7 @@ const Records = () => {
                 <p><strong>Marital Status:</strong> {selectedPatient.maritalStatus}</p>
                 <p><strong>Children:</strong> {selectedPatient.children}</p>
                 <p><strong>Symptoms:</strong> {selectedPatient.symptoms.join(", ")}</p>
-                <p><strong>Last Appointment:</strong> {selectedPatient.lastAppointment}</p>
+                <p><strong>Last Appointment:</strong> {new Date(selectedPatient.lastAppointment).toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit' , day: '2-digit'})}</p>
                 <div style={{ marginTop: "20px" }}>
                   <input
                     type="file"

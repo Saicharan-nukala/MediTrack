@@ -66,7 +66,27 @@ router.put("/:doctorId", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+// ✅ Get only "new" patients assigned to a specific doctor
+router.get("/:doctorId/new-patients", async (req, res) => {
+  try {
+    const { doctorId } = req.params;
 
+    // Check if doctor exists
+    const doctor = await Doctor.findById(doctorId);
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
 
+    // Fetch patients where doctor matches and isNew is true
+    const newPatients = await Patient.find({
+      _id: { $in: doctor.patients },
+      isNew: true
+    });
 
+    res.status(200).json(newPatients);
+  } catch (error) {
+    console.error("Error fetching new patients:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
 module.exports = router;

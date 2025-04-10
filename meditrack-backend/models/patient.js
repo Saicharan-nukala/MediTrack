@@ -11,6 +11,14 @@ const patientSchema = new mongoose.Schema({
     firstAppointment: { type: Date, required: true },
     lastAppointment: { type: Date, required: true },
     nextAppointment: { type: Date, default: null },
+    doctor: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "doctor"
+      },
+      isNew: {
+        type: Boolean,
+        default: false
+      },
     // List of all appointments
     appointments: [
         {

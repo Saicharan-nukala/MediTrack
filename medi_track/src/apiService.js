@@ -53,4 +53,26 @@ export const updateDoctorDetails = async (doctorId, updatedData) => {
       return null;
     }
   };
-  
+  // ✅ Fetch patient details by ID
+export const fetchPatientById = async (patientId) => {
+  try {
+      if (!patientId) {
+          throw new Error("Patient ID is required");
+      }
+
+      const response = await axios.get(`${API_BASE_URL}/patients/${patientId}`);
+      return response.data; // Returns patient details
+  } catch (error) {
+      console.error("Error fetching patient details:", error.response?.data || error.message);
+      return null;
+  }
+};
+export const getNewPatientsByDoctor = async (doctorId) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/doctors/${doctorId}/new-patients`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching new patients:", error);
+    throw error;
+  }
+};

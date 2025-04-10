@@ -50,7 +50,7 @@ const Patients = () => {
             <p><strong>Marital Status:</strong> {selectedPatient.maritalStatus}</p>
             <p><strong>Children:</strong> {selectedPatient.children}</p>
             <p><strong>Symptoms:</strong> {selectedPatient.symptoms.join(", ")}</p>
-            <p><strong>Last Appointment:</strong> {selectedPatient.lastAppointment}</p>
+            <p><strong>Last Appointment:</strong> {new Date(selectedPatient.lastAppointment).toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit' , day: '2-digit'})}</p>
 
             {/* EHR Dropdown */}
             {selectedPatient.ehrs.length > 0 ? (

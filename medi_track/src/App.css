@@ -230,7 +230,6 @@
 }
 .patientlist
 {
-  /* background-color: aquamarine; */
   width: 25vw;
   padding: 3vh;
   border-radius: 5px;
@@ -499,6 +498,7 @@ background-color: #ccece8;
   display: flex;
   justify-self: center;
   align-items: center;
+  height: 100vh;
 }
 .recorddivider
 {
@@ -510,8 +510,10 @@ background-color: #ccece8;
 .recordleftpatients
 {
   width: 30vw;
-  height: 80vh;
-
+  height: 70vh;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 .recordrightcontainer {
   margin: 2vh;

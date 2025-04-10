@@ -42,5 +42,20 @@ router.post("/add-multiple", async (req, res) => {
         res.status(500).json({ message: "Error adding patients", error: error.message });
     }
 });
+// Get patient by ID
+router.get("/:id", async (req, res) => {
+  console.log("Fetching patient with ID:", req.params.id);
+  try {
+    const patient = await Patient.findById(req.params.id).populate("doctor");
+    
+    if (!patient) {
+      return res.status(404).json({ message: "Patient not found" });
+    }
+
+    res.json(patient);
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving patient", error: error.message });
+  }
+});
 
 module.exports = router;

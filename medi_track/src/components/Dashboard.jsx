@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { fetchDoctorPatients } from "../apiService";
 import { fetchDoctorDetails } from "../apiService";
+import { getNewPatientsByDoctor } from "../apiService";
 const Dashboard = () => {
   const [patients, setPatients] = useState([]);
   const doctorId = "67cd6bebf6637dfbd4d3b867"; // Your actual doctor ID
   const [doctor, setDoctor] = useState(null); // Replace with actual doctor ID
-
   useEffect(() => {
     const getDoctorDetails = async () => {
       const data = await fetchDoctorDetails(doctorId);
@@ -15,63 +15,21 @@ const Dashboard = () => {
     };
     getDoctorDetails();
   }, []);
-  
   useEffect(() => {
     fetchDoctorPatients(doctorId).then((data) => setPatients(data));
   }, []);
-
-
-  const newPatients = [
-    {
-      id: 3,
-      name: "Alice Brown",
-      age: 40,
-      gender: "Female",
-      condition: "Asthma",
-      maritalStatus: "Married",
-      children: 1,
-      symptoms: ["Shortness of Breath", "Cough"],
-      firstAppointment: "2024-12-15",
-      ehrs: [],
-    },
-    {
-      id: 4,
-      name: "Michael Green",
-      age: 28,
-      gender: "Male",
-      condition: "Allergy",
-      maritalStatus: "Single",
-      children: 0,
-      symptoms: ["Sneezing", "Skin Rash"],
-      firstAppointment: "2024-12-15",
-      ehrs: [],
-    },
-    {
-      id: 5,
-      name: "Sophia Williams",
-      age: 35,
-      gender: "Female",
-      condition: "Migraine",
-      maritalStatus: "Married",
-      children: 2,
-      symptoms: ["Severe Headache", "Nausea"],
-      firstAppointment: "2024-12-16",
-      ehrs: [],
-    },
-    {
-      id: 6,
-      name: "David Johnson",
-      age: 50,
-      gender: "Male",
-      condition: "Arthritis",
-      maritalStatus: "Married",
-      children: 3,
-      symptoms: ["Joint Pain", "Swelling"],
-      firstAppointment: "2024-12-17",
-      ehrs: [],
-    },
-  ];
-
+  const [newPatients, setNewPatients] = useState([]);
+  useEffect(() => {
+    const fetchNewPatients = async () => {
+      try {
+        const data = await getNewPatientsByDoctor(doctorId); // API call
+        setNewPatients(data); // Set fetched new patients
+      } catch (error) {
+        console.error("Failed to fetch new patients:", error);
+      }
+    };
+    fetchNewPatients();
+  }, []);
   const today = new Date().toISOString().split("T")[0];
   const todaysPatients = patients.filter(
     (patient) => patient.nextAppointment === today
