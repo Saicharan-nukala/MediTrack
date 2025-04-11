@@ -1,30 +1,28 @@
-require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 
-// CORS fix for frontend (adjust origin if deployed)
+// CORS fix
 app.use(cors({
   origin: "http://localhost:5173",
   credentials: true,
 }));
 
-// Allow large payloads (images, etc.)
+// Allow large payloads (images as base64)
 app.use(express.json({ limit: "20mb" }));
 app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 
-// MongoDB Atlas Connection
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect("mongodb://127.0.0.1:27017/meditrack", {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("✅ MongoDB Atlas Connected"))
-.catch(err => console.error("❌ MongoDB Connection Error:", err));
+  useUnifiedTopology: true
+}).then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
 
 app.get("/", (req, res) => {
-  res.send("MediTrack Backend Running ✅");
+  res.send("MediTrack Backend Running");
 });
 
 // Routes
@@ -34,6 +32,5 @@ const patientRoutes = require("./routes/patientRoutes");
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/patients", patientRoutes);
 
-// Server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
