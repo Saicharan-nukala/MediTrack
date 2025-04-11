@@ -66,3 +66,27 @@ export const getNewPatientsByDoctor = async (doctorId) => {
     throw error;
   }
 };
+
+// ✅ Fetch all active appointments for a specific doctor returns all the patints
+export const getActiveAppointmentPatientsByDoctor = async (doctorId) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}/appointments/active/doctor/${doctorId}`);
+    if (!res.ok) throw new Error("Failed to fetch active patients");
+    return await res.json();
+  } catch (err) {
+    console.error("Error fetching active patients for doctor:", err);
+    return [];
+  }
+};
+
+
+// ✅ Fetch appointments where isActive = true AND isReportGenerated = false
+export const getAppointmentsWithPendingReports = async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/appointments/pending-reports`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching pending report appointments:", error.response?.data || error.message);
+    return [];
+  }
+};

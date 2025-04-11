@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
 import { fetchDoctorDetails, updateDoctorDetails } from "../apiService";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
     const doctorId = localStorage.getItem("doctorId"); // Replace with dynamic ID if needed
     const [doctor, setDoctor] = useState(null);
     const [editMode, setEditMode] = useState(false);
-
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem("doctorId");
+        localStorage.removeItem("doctorToken");
+        navigate("/login");
+    };
     useEffect(() => {
         const getDoctorDetails = async () => {
             const data = await fetchDoctorDetails(doctorId);
@@ -156,6 +162,11 @@ const Profile = () => {
                     {editMode ? "Save Changes" : "Edit Profile"}
                 </button>
             </div>
+            <div style={styles.buttonContainer}>
+                <button onClick={handleLogout} style={{ ...styles.button, backgroundColor: "#f44336" }}>
+                    Logout
+                </button>
+            </div>
         </div>
     );
 };
@@ -238,21 +249,21 @@ const styles = {
     },
     imageGroup: {
         marginBottom: "25px",
-      },
-      
-      imageRow: {
+    },
+
+    imageRow: {
         display: "flex",
         alignItems: "center",
         gap: "20px",
         marginTop: "8px",
-      },
-      
-      btnGroup: {
+    },
+
+    btnGroup: {
         display: "flex",
         flexDirection: "column",
         gap: "8px",
         alignItems: "flex-start",
-      },      
+    },
 };
 
 export default Profile;

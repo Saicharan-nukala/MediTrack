@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchDoctorPatients } from "../apiService";
 import { getNewPatientsByDoctor } from "../apiService";
+import { getActiveAppointmentPatientsByDoctor } from "../apiService";
 const filterAppointmentsByDate = (patients, startDate, endDate) => {
   return patients.filter((patient) => {
     const lastAppointment = patient.lastAppointment ? new Date(patient.lastAppointment) : null;
@@ -29,8 +29,8 @@ const Appointments = () => {
   };
 
   useEffect(() => {
-    fetchDoctorPatients(doctorId).then((data) => setPatients(data));
-  }, []);
+    getActiveAppointmentPatientsByDoctor(doctorId).then((data) => setPatients(data));
+  }, []);  
   const [newPatients, setNewPatients] = useState([]);
   useEffect(() => {
     const fetchNewPatients = async () => {

@@ -5,6 +5,8 @@ const cors = require("cors");
 
 const app = express();
 
+
+
 // CORS fix for frontend (adjust origin if deployed)
 app.use(cors({
   origin: "http://localhost:5173",
@@ -30,10 +32,10 @@ app.get("/", (req, res) => {
 // Routes
 const doctorRoutes = require("./routes/doctorRoutes");
 const patientRoutes = require("./routes/patientRoutes");
-
+const appointmentRoutes = require("./routes/appointmentRoutes");
 app.use("/api/doctors", doctorRoutes);
 app.use("/api/patients", patientRoutes);
-
+app.use("/api/appointments", appointmentRoutes);
 // Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
