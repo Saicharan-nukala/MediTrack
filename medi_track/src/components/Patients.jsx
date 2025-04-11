@@ -4,7 +4,7 @@ import { fetchDoctorPatients } from "../apiService";
 const Patients = () => {
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [selectedEHR, setSelectedEHR] = useState("");
-  const doctorId = "67cd6bebf6637dfbd4d3b867"; // Your actual doctor ID
+  const doctorId = localStorage.getItem("doctorId"); // Your actual doctor ID
   const [patients, setPatients] = useState([]);
 
   useEffect(() => {

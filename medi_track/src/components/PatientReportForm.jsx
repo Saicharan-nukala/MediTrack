@@ -117,7 +117,7 @@ const PatientReportForm = () => {
   };
   const [doctor, setDoctor] = useState(null);
   const [loading, setLoading] = useState(true);
-  const doctorId = "67cd6bebf6637dfbd4d3b867";
+  const doctorId = localStorage.getItem("doctorId");
   useEffect(() => {
     const getDoctorDetails = async () => {
       if (!doctorId) return; // Ensure doctorId is available

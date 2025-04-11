@@ -11,5 +11,9 @@ const doctorSchema = new mongoose.Schema({
   patients: [{ type: mongoose.Schema.Types.ObjectId, ref: "Patient" }],
   appointments: [{ type: Date }]
 });
-
+doctorSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
 module.exports = mongoose.model("Doctor", doctorSchema);

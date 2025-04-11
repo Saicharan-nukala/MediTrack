@@ -2,7 +2,36 @@ const express = require("express");
 const Doctor = require("../models/doctor");
 const Patient = require("../models/patient");
 const router = express.Router();
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+// POST /api/doctors/login
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
 
+  try {
+    const doctor = await Doctor.findOne({ email });
+    if (!doctor) {
+      return res.status(404).json({ message: "Doctor not found" });
+    }
+
+    const isMatch = await bcrypt.compare(password, doctor.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const token = jwt.sign({ id: doctor._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+
+    res.status(200).json({
+      token,
+      doctorId: doctor._id,
+      name: doctor.name,
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Server error", error: err.message });
+  }
+});
 // Create a new doctor
 router.post("/add", async (req, res) => {
   try {

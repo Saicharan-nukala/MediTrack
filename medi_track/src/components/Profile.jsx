@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { fetchDoctorDetails, updateDoctorDetails } from "../apiService";
 
 const Profile = () => {
-    const doctorId = "67cd6bebf6637dfbd4d3b867"; // Replace with dynamic ID if needed
+    const doctorId = localStorage.getItem("doctorId"); // Replace with dynamic ID if needed
     const [doctor, setDoctor] = useState(null);
     const [editMode, setEditMode] = useState(false);
 

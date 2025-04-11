@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Records = () => {
   const navigate = useNavigate();
-  const doctorId = "67cd6bebf6637dfbd4d3b867"; // Your actual doctor ID
+  const doctorId = localStorage.getItem("doctorId"); // Your actual doctor ID
   const [patients, setPatients] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedPatient, setSelectedPatient] = useState(null); // Track selected patient

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import NavBar from "./Navbar";
 import Dashboard from "./Dashboard";
 import Patients from "./Patients";
@@ -8,6 +8,13 @@ import PatientReportForm from "./PatientReportForm";
 import Profile from "./Profile";
 
 const DoctorMain = () => {
+  const doctorId = localStorage.getItem("doctorId");
+  const location = useLocation();
+
+  if (!doctorId) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
   const doctorNavItems = [
     { name: "Dashboard", path: "/dashboard" },
     { name: "Appointments", path: "/appointments" },
@@ -15,26 +22,20 @@ const DoctorMain = () => {
     { name: "Records", path: "/records" },
     { name: "Profile", path: "/profile" },
   ];
+
   return (
-    <Router>
-      <div className="bodymain">
-        <NavBar navItems={doctorNavItems} />
-        <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" />} />
-          <Route path="/dashboard" element={<Dashboard  />} />
-          <Route path="/appointments" element={<Appointments />} />
-          <Route path="/patients" element={<Patients />} />
-          <Route path="/records" element={<Records />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/report-form" element={<PatientReportForm />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="bodymain">
+      <NavBar navItems={doctorNavItems} />
+      <Routes>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/appointments" element={<Appointments />} />
+        <Route path="/patients" element={<Patients />} />
+        <Route path="/records" element={<Records />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/report-form" element={<PatientReportForm />} />
+      </Routes>
+    </div>
   );
 };
 
 export default DoctorMain;
-
-
-
-

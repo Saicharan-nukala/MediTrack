@@ -25,16 +25,6 @@ export const fetchDoctorDetails = async (doctorId) => {
         return null;
     }
 };
-
-// ✅ Example Usage (Call this function in your component)
-const doctorId = "67cd6bebf6637dfbd4d3b867"; // Replace with actual doctor ID
-
-const testFetchPatients = async () => {
-    const patients = await fetchDoctorPatients(doctorId);
-    console.log("Doctor's Patients:", patients);
-};
-
-testFetchPatients(); // Call function to check if it works
 export const updateDoctorDetails = async (doctorId, updatedData) => {
     try {
       const res = await fetch(`${API_BASE_URL}/doctors/${doctorId}`, {

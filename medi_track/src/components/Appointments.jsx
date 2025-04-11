@@ -19,7 +19,7 @@ const Appointments = () => {
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState(today);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
-  const doctorId = "67cd6bebf6637dfbd4d3b867"; // Your actual doctor ID
+  const doctorId = localStorage.getItem("doctorId"); // Your actual doctor ID
   const [patients, setPatients] = useState([]);
 
   const handleFilter = () => {

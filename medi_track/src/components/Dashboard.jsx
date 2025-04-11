@@ -4,7 +4,7 @@ import { fetchDoctorDetails } from "../apiService";
 import { getNewPatientsByDoctor } from "../apiService";
 const Dashboard = () => {
   const [patients, setPatients] = useState([]);
-  const doctorId = "67cd6bebf6637dfbd4d3b867"; // Your actual doctor ID
+  const doctorId = localStorage.getItem("doctorId"); // Your actual doctor ID
   const [doctor, setDoctor] = useState(null); // Replace with actual doctor ID
   useEffect(() => {
     const getDoctorDetails = async () => {
