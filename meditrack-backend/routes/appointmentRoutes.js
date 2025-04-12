@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Appointment = require("../models/appointment");
-const Patient = require("../models/patient"); 
+const Patient = require("../models/patient");
 // Create appointment
 router.post("/", async (req, res) => {
     try {
@@ -37,22 +37,41 @@ router.get("/patient/:patientId", async (req, res) => {
 // 1️⃣ Get all patients with active appointments for a doctor
 router.get("/active/doctor/:doctorId", async (req, res) => {
     try {
-      const appointments = await Appointment.find({
-        doctor: req.params.doctorId,
-        isActive: true
-      });
-  
-      const patientIds = [...new Set(appointments.map(app => app.patient.toString()))];
-      const patients = await Patient.find({ _id: { $in: patientIds } });
-  
-      res.status(200).json(patients);
+        const appointments = await Appointment.find({
+            doctor: req.params.doctorId,
+            isActive: true
+        });
+
+        const patientIds = [...new Set(appointments.map(app => app.patient.toString()))];
+        const patients = await Patient.find({ _id: { $in: patientIds } });
+
+        res.status(200).json(patients);
     } catch (err) {
-      res.status(500).json({
-        message: "Error fetching active appointment patients",
-        error: err.message
-      });
+        res.status(500).json({
+            message: "Error fetching active appointment patients",
+            error: err.message
+        });
     }
-  });
+});
+// Get all active appointments for a doctor (updated version)
+router.get("/activeappoinmetns/doctor/:doctorId", async (req, res) => {
+    try {
+        const appointments = await Appointment.find({
+            doctor: req.params.doctorId,
+            isActive: true
+        })
+        .populate('patient')
+        .populate('doctor')
+        .sort({ currentAppointmentDate: -1 });
+
+        res.status(200).json(appointments);
+    } catch (err) {
+        res.status(500).json({
+            message: "Error fetching active appointments",
+            error: err.message
+        });
+    }
+});
 
 // 2️⃣ Get appointments where isActive=true AND isReportGenerated=false
 router.get("/pending-reports", async (req, res) => {
@@ -67,4 +86,42 @@ router.get("/pending-reports", async (req, res) => {
         res.status(500).json({ message: "Error fetching pending report appointments", error: err.message });
     }
 });
+// 🧠 Get patients with active appointments that don't have reports for a specific doctor
+router.get("/active-unreported/doctor/:doctorId", async (req, res) => {
+    try {
+      const appointments = await Appointment.find({
+        doctor: req.params.doctorId,
+        isActive: true,
+        isReportGenerated: false,
+      }).populate("patient");
+  
+      res.status(200).json(appointments); // send full appointment with patient
+    } catch (err) {
+      res.status(500).json({
+        message: "Error fetching patients with unreported active appointments",
+        error: err.message,
+      });
+    }
+  });
+  // Get appointments with pending reports for a specific doctor
+router.get("/pending-reports/doctor/:doctorId", async (req, res) => {
+    try {
+      const appointments = await Appointment.find({
+        doctor: req.params.doctorId,
+        isActive: true,
+        isReportGenerated: false
+      })
+      .populate("patient", "name email phone") // Only include essential patient fields
+      .populate("doctor", "name specialization")
+      .sort({ currentAppointmentDate: -1 }); // Newest first
+  
+      res.status(200).json(appointments);
+    } catch (err) {
+      console.error("Error fetching pending report appointments:", err);
+      res.status(500).json({ 
+        message: "Error fetching pending report appointments",
+        error: err.message
+      });
+    }
+  });
 module.exports = router;

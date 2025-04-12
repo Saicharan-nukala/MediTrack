@@ -136,34 +136,42 @@ const PatientReportForm = () => {
       console.error("Error: Report reference is null!");
       return;
     }
+  
     const reportElement = reportRef.current;
+  
     try {
-      const canvas = await html2canvas(reportElement, { scale: 2 });
-
-      const imgData = canvas.toDataURL("image/png");
+      // 🧠 Reduce scale from 2 ➜ 1.5 or 1 (smaller = less resolution = smaller file)
+      const canvas = await html2canvas(reportElement, { scale: 1.2, useCORS: true });
+  
+      // 🔻 Convert canvas to lower-quality JPEG instead of PNG (much smaller size)
+      const imgData = canvas.toDataURL("image/jpeg", 0.7); // 0.7 = 70% quality
+  
       const pdf = new jsPDF("p", "mm", "a4");
-
+  
       const imgWidth = 190;
       const pageHeight = 297;
       let imgHeight = (canvas.height * imgWidth) / canvas.width;
       let heightLeft = imgHeight;
       let position = 0;
-
-      pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+  
+      // 🧾 Add first page
+      pdf.addImage(imgData, "JPEG", 10, position, imgWidth, imgHeight);
       heightLeft -= pageHeight;
-
+  
       while (heightLeft > 0) {
         position = heightLeft - imgHeight;
         pdf.addPage();
-        pdf.addImage(imgData, "PNG", 10, position, imgWidth, imgHeight);
+        pdf.addImage(imgData, "JPEG", 10, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
       }
-
+  
+      // 📦 Save it
       pdf.save(`Patient_Report_${formData.patientName || "Unknown"}.pdf`);
     } catch (error) {
       console.error("PDF Generation Error:", error);
     }
   };
+  
   return (
     <>
       <div className="report-container" ref={reportRef}>

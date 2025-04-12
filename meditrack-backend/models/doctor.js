@@ -9,7 +9,6 @@ const doctorSchema = new mongoose.Schema({
   profilePic: String,
   signature: String,
   patients: [{ type: mongoose.Schema.Types.ObjectId, ref: "Patient" }],
-  appointments: [{ type: Date }]
 });
 doctorSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();

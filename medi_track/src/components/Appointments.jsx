@@ -27,7 +27,6 @@ const Appointments = () => {
     const end = new Date(endDate);
     setFilteredAppointments(filterAppointmentsByDate(patients, start, end));
   };
-
   useEffect(() => {
     getActiveAppointmentPatientsByDoctor(doctorId).then((data) => setPatients(data));
   }, []);  

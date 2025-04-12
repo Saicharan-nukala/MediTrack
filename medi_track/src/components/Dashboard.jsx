@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { fetchDoctorPatients } from "../apiService";
 import { fetchDoctorDetails } from "../apiService";
-import { getNewPatientsByDoctor } from "../apiService";
+import { getNewPatientsByDoctor,getActiveAppointmentsByDoctor,getPendingReportAppointmentsByDoctor} from "../apiService";
 const Dashboard = () => {
   const [patients, setPatients] = useState([]);
   const doctorId = localStorage.getItem("doctorId"); // Your actual doctor ID
   const [doctor, setDoctor] = useState(null); // Replace with actual doctor ID
+  const [activeAppointmnets,setactiveAppointmnets] = useState([]);
+  const [pendingReportAppointments,setpendingReportAppointments] = useState([]);
+  console.log("Pending Reports : - ", getPendingReportAppointmentsByDoctor(doctorId));
+
   useEffect(() => {
     const getDoctorDetails = async () => {
       const data = await fetchDoctorDetails(doctorId);
@@ -17,6 +21,12 @@ const Dashboard = () => {
   }, []);
   useEffect(() => {
     fetchDoctorPatients(doctorId).then((data) => setPatients(data));
+  }, []);
+  useEffect(() => {
+    getActiveAppointmentsByDoctor(doctorId).then((data) => setactiveAppointmnets(data));
+  }, []);
+  useEffect(() => {
+    getPendingReportAppointmentsByDoctor(doctorId).then((data) => setpendingReportAppointments(data));
   }, []);
   const [newPatients, setNewPatients] = useState([]);
   useEffect(() => {
@@ -31,46 +41,30 @@ const Dashboard = () => {
     fetchNewPatients();
   }, []);
   const today = new Date().toISOString().split("T")[0];
-  const todaysPatients = patients.filter(
-    (patient) => patient.nextAppointment === today
+  const todaysAppointmnets = activeAppointmnets.filter(
+    (appointment) => appointment.
+    currentAppointmentDate.toISOString().split("T")[0] === today
   );
-  const getTotalAppointmentsThisWeek = (patients) => {
+  console.log("Today Appoinments : -",todaysAppointmnets);
+  const getTotalAppointmentsThisWeek = (appointments) => {
     const today = new Date();
     const startOfWeek = new Date(today);
     startOfWeek.setDate(today.getDate() - today.getDay());
     const endOfWeek = new Date(startOfWeek);
     endOfWeek.setDate(startOfWeek.getDate() + 6);
 
-    return patients.filter(patient => {
-      const appointmentDate = new Date(patient.nextAppointment);
+    return appointments.filter(appointment => {
+      const appointmentDate = new Date(appointment.currentAppointmentDate);
       return appointmentDate >= startOfWeek && appointmentDate <= endOfWeek;
     }).length;
   };
 
-  const getRecordstouploadthisWeek = (patients) => {
-    const today = new Date();
-    const startOfLastWeek = new Date(today);
-    startOfLastWeek.setDate(today.getDate() - today.getDay() - 7);
-    const endOfLastWeek = new Date(startOfLastWeek);
-    endOfLastWeek.setDate(startOfLastWeek.getDate() + 6);
-
-    return patients.filter(patient => {
-      const appointmentDate = new Date(patient.nextAppointment);
-      return appointmentDate >= startOfLastWeek && appointmentDate <= endOfLastWeek;
-    }).length;
+  const getRecordstouploadthisWeek = (appointments) => {
+    return appointments.length;
   };
+  const getRecordstouploadthisWeekPatinets = (appointments) => {
 
-  const getPatientsofRectoUploadThisWeek = (patients) => {
-    const today = new Date();
-    const startOfLastWeek = new Date(today);
-    startOfLastWeek.setDate(today.getDate() - today.getDay() - 7);
-    const endOfLastWeek = new Date(startOfLastWeek);
-    endOfLastWeek.setDate(startOfLastWeek.getDate() + 6);
-
-    return patients.filter(patient => {
-      const appointmentDate = new Date(patient.nextAppointment);
-      return appointmentDate >= startOfLastWeek && appointmentDate <= endOfLastWeek;
-    });
+    return appointments;
   };
 
 
@@ -88,25 +82,25 @@ const Dashboard = () => {
               <p>Total Patients : {patients.length}</p>
             </div>
             <div className="in-grid-item i2">
-              <p> Total Appointments (This Week): {getTotalAppointmentsThisWeek(patients)}</p>
+              <p> Total Appointments (This Week): {getTotalAppointmentsThisWeek(activeAppointmnets)}</p>
             </div>
             <div className="in-grid-item">
-              <p> Total Records to upload (This Week): {getRecordstouploadthisWeek(patients)}</p>
+              <p> Total Records to upload : {getRecordstouploadthisWeek(pendingReportAppointments)}</p>
             </div>
           </div>
           <div className="grid-item">
             <div className="todaypatientlistdash">
               <h3 className="dashheading">Today Appointments</h3>
-              {todaysPatients.length === 0 ? (
+              {todaysAppointmnets.length === 0 ? (
                 <p className="nopatientmsgleft">No patients available</p>
               ) : (
                 <ul>
-                  {todaysPatients.map((patient) => (
+                  {todaysAppointmnets.map((appointment) => (
                     <li
-                      key={patient.id}
+                      key={appointment._id}
                       className={`today-patient-item`}
                     >
-                      {patient.name}
+                      {appointment.patientName}
                     </li>
                   ))}
                 </ul>
@@ -115,17 +109,17 @@ const Dashboard = () => {
           </div>
           <div className="grid-item">
             <div className="todaypatientlistdash">
-              <h3 className="dashheading">Patients list of records to upload this week</h3>
-              {getPatientsofRectoUploadThisWeek(patients).length === 0 ? (
+              <h3 className="dashheading">Report Upload Pending Patinets</h3>
+              {getRecordstouploadthisWeekPatinets(pendingReportAppointments).length === 0 ? (
                 <p className="nopatientmsgleft">No Records To Upload This Week</p>
               ) : (
                 <ul>
-                  {getPatientsofRectoUploadThisWeek(patients).map((patient) => (
+                  {getRecordstouploadthisWeekPatinets(pendingReportAppointments).map((activeAppointmnet) => (
                     <li
-                      key={patient.id}
+                      key={activeAppointmnet._id}
                       className={`today-patient-item`}
                     >
-                      {patient.name}
+                      {activeAppointmnet.patientName}
                     </li>
                   ))}
                 </ul>

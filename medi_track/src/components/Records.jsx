@@ -1,25 +1,23 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchDoctorPatients } from "../apiService";
+import { getPatientsWithActiveUnreportedAppointments} from "../apiService";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Records = () => {
   const navigate = useNavigate();
-  const doctorId = localStorage.getItem("doctorId"); // Your actual doctor ID
   const [patients, setPatients] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedPatient, setSelectedPatient] = useState(null); // Track selected patient
 
   useEffect(() => {
-    fetchDoctorPatients(doctorId).then((data) => setPatients(data));
+    const doctorId = localStorage.getItem("doctorId");
+    getPatientsWithActiveUnreportedAppointments(doctorId).then(setPatients);
   }, []);
 
   const handlePatientClick = (patient) => {
     setSelectedPatient(patient);
-  };
-
-  
+  }; 
   const handleGenerateReport = () => {
     if (selectedPatient) {
       const patientData = encodeURIComponent(JSON.stringify(selectedPatient));
@@ -46,8 +44,6 @@ const Records = () => {
       toast.warn("No file selected!");
     }
   };
-
-
   return (
     <>
       <div>

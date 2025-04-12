@@ -42,7 +42,10 @@ const appointmentSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-  }
+  },
+  pdfReport: {
+    file: { type: String }, // This will store the Base64 string
+  },
 });
 
 
@@ -81,6 +84,27 @@ appointmentSchema.pre("save", async function (next) {
   } catch (err) {
     console.error("❌ Error populating names in appointment:", err.message);
     next(err);
+  }
+});
+appointmentSchema.pre("save", async function (next) {
+  try {
+    // Check only if this appointment is marked as active
+    if (this.isActive) {
+      const existingActive = await mongoose.model("Appointment").findOne({
+        patient: this.patient,
+        isActive: true,
+        _id: { $ne: this._id }, // exclude current one if updating
+      });
+
+      if (existingActive) {
+        const err = new Error("This patient already has an active appointment.");
+        return next(err); // ❌ Block save
+      }
+    }
+
+    next(); // ✅ Continue if no conflict
+  } catch (err) {
+    next(err); // ❌ Catch any DB errors
   }
 });
 module.exports = mongoose.model("Appointment", appointmentSchema);
