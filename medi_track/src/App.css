@@ -396,6 +396,27 @@ background-color: #ccece8;
 {
   color: #649cac;
 }
+.appointmentsContainer {
+  max-height: 300px; /* adjust as needed */
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.appointmentsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.appointmentItem {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
 /* Doctor - Appointment */
 .appointmentmain
 {

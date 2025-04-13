@@ -189,3 +189,12 @@ export const uploadPdfReport = async (appointmentId, file) => {
     throw error; // Re-throw for handling in component
   }
 };
+export const getAllAppointmentsByPatient = async (patientId) => {
+  try {
+    const response = await axios.get(`http://localhost:5000/api/appointments/patient/${patientId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching appointments for patient:", error.response?.data || error.message);
+    return [];
+  }
+};

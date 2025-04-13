@@ -58,10 +58,7 @@ const appointmentSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-  },
-  pdfReport: {
-    file: { type: String }, // This will store the Base64 string
-  },
+  }
 });
 
 
