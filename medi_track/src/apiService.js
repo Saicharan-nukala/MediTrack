@@ -152,3 +152,40 @@ export const getPendingReportAppointmentsByDoctor = async (doctorId) => {
     return []; // Always return array to prevent frontend crashes
   }
 };
+export const uploadPdfReport = async (appointmentId, file) => {
+  try {
+    // 1. Validate inputs
+    if (!appointmentId || !file) {
+      throw new Error('Appointment ID and file are required');
+    }
+
+    // 2. Convert file to Base64
+    const base64Data = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+
+    // 3. Send to backend
+    const response = await fetch(`${API_BASE_URL}/appointments/${appointmentId}/report`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({ pdfBase64: base64Data })
+    });
+
+    // 4. Handle non-OK responses
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Upload failed');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Upload error:', error);
+    throw error; // Re-throw for handling in component
+  }
+};

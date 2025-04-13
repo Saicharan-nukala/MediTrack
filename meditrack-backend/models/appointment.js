@@ -30,6 +30,22 @@ const appointmentSchema = new mongoose.Schema({
   notes: {
     type: String,
   },
+  pdfReport: {
+    file: { 
+      type: String,
+      validate: {
+        validator: function(v) {
+          // Basic PDF validation (first 6 chars should be 'JVBERi')
+          return !v || v.startsWith('JVBERi');
+        },
+        message: 'Uploaded file is not a valid PDF'
+      }
+    },
+    uploadedAt: {
+      type: Date,
+      default: null
+    }
+  },
   isActive: {
     type: Boolean,
     default: true, // true means upcoming/in-progress
@@ -105,6 +121,94 @@ appointmentSchema.pre("save", async function (next) {
     next(); // ✅ Continue if no conflict
   } catch (err) {
     next(err); // ❌ Catch any DB errors
+  }
+});
+// Middleware to handle appointment activation/deactivation
+appointmentSchema.pre("save", async function (next) {
+  try {
+    if (this.isModified('isActive') || this.isModified('currentAppointmentDate')) {
+      const patientUpdate = {};
+      
+      // When activating an appointment
+      if (this.isActive) {
+        // Check for existing active appointment
+        const existingActive = await mongoose.model("Appointment").findOne({
+          patient: this.patient,
+          isActive: true,
+          _id: { $ne: this._id }
+        });
+
+        if (existingActive) {
+          const err = new Error("Patient already has an active appointment");
+          return next(err);
+        }
+
+        // Set as active appointment and update nextAppointment
+        patientUpdate.activeAppointment = this._id;
+        patientUpdate.nextAppointment = this.currentAppointmentDate;
+      }
+      // When deactivating an appointment
+      else if (this.isModified('isActive')) {
+        patientUpdate.lastAppointment = this.currentAppointmentDate;
+        patientUpdate.activeAppointment = null;
+        // Don't modify nextAppointment here - it might have been set for future
+      }
+
+      // If current date changed on active appointment, update nextAppointment
+      if (this.isActive && this.isModified('currentAppointmentDate')) {
+        patientUpdate.nextAppointment = this.currentAppointmentDate;
+      }
+
+      if (Object.keys(patientUpdate).length > 0) {
+        await Patient.findByIdAndUpdate(this.patient, {
+          $set: patientUpdate
+        });
+      }
+    }
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Handle appointment deletion
+appointmentSchema.post("remove", async function (doc, next) {
+  try {
+    if (doc.isActive) {
+      await Patient.findByIdAndUpdate(doc.patient, {
+        $set: { 
+          lastAppointment: doc.currentAppointmentDate,
+          activeAppointment: null
+          // Don't clear nextAppointment as it might reference another appointment
+        }
+      });
+    }
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Add this middleware to handle PDF uploads
+appointmentSchema.pre('save', async function(next) {
+  if (this.isModified('pdfReport.file') && this.pdfReport?.file) {
+    try {
+      // 1. Validate PDF
+      if (!this.pdfReport.file.startsWith('JVBERi')) {
+        throw new Error('Invalid PDF file');
+      }
+
+      // 2. Update report status and deactivate
+      this.isReportGenerated = true;
+      this.isActive = false;
+      this.pdfReport.uploadedAt = new Date();
+
+      next();
+    } catch (err) {
+      next(err);
+    }
+  } else {
+    next();
   }
 });
 module.exports = mongoose.model("Appointment", appointmentSchema);

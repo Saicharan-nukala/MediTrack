@@ -23,7 +23,11 @@ const patientSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
-
+  activeAppointment: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Appointment",
+    default: null
+  },
   appointments: [
     {
       date: { type: Date, required: true },

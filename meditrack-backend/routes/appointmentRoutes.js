@@ -124,4 +124,36 @@ router.get("/pending-reports/doctor/:doctorId", async (req, res) => {
       });
     }
   });
+// ✅ Add this correct route instead (before module.exports)
+router.post('/:id/report', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { pdfBase64 } = req.body;
+
+    if (!pdfBase64) {
+      return res.status(400).json({ error: 'PDF data is required' });
+    }
+
+    const appointment = await Appointment.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          'pdfReport.file': pdfBase64,
+          isReportGenerated: true,
+          isActive: false
+        }
+      },
+      { new: true }
+    );
+
+    if (!appointment) {
+      return res.status(404).json({ error: 'Appointment not found' });
+    }
+
+    res.json({ success: true, appointment });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 module.exports = router;

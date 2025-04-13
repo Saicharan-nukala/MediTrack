@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getPatientsWithActiveUnreportedAppointments} from "../apiService";
+import { getPatientsWithActiveUnreportedAppointments ,uploadPdfReport} from "../apiService";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -35,13 +35,40 @@ const Records = () => {
     }
   };
 
-  const handleUpload = () => {
-    if (selectedFile) {
-      toast.success(`PDF "${selectedFile.name}" uploaded successfully!`);
-      // Upload logic here
-      setSelectedFile(null); // Reset after upload
-    } else {
-      toast.warn("No file selected!");
+  // Update your handleUpload function
+  const handleUpload = async () => {
+    if (!selectedFile || !selectedPatient) {
+      toast.warn("Please select both a patient and a file!");
+      return;
+    }
+  
+    try {
+      console.log("Selected Patient:", selectedPatient);
+      const activeAppointmentId = selectedPatient.activeAppointment;
+      
+      if (!activeAppointmentId) {
+        throw new Error("No active appointment found for this patient");
+      }
+  
+      // Show loading state
+      toast.info("Uploading report...");
+      
+      await uploadPdfReport(activeAppointmentId, selectedFile);
+      
+      toast.success("Report uploaded successfully!");
+      
+      // Refresh the patient list
+      const doctorId = localStorage.getItem("doctorId");
+      const updatedPatients = await getPatientsWithActiveUnreportedAppointments(doctorId);
+      setPatients(updatedPatients);
+      
+      // Reset selections
+      setSelectedFile(null);
+      setSelectedPatient(null);
+      
+    } catch (error) {
+      console.error("Upload error details:", error);
+      toast.error(`Upload failed: ${error.message}`);
     }
   };
   return (
