@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchDoctorDetails, updateDoctorDetails } from "../apiService";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const Profile = () => {
     const doctorId = localStorage.getItem("doctorId"); // Replace with dynamic ID if needed
@@ -48,7 +49,7 @@ const Profile = () => {
         if (editMode) {
             const updated = await updateDoctorDetails(doctorId, doctor);
             if (updated) {
-                alert("Profile updated successfully!");
+                toast.success("Profile updated successfully!");
                 setDoctor(updated);
             } else {
                 alert("Update failed. Try again.");
@@ -167,6 +168,7 @@ const Profile = () => {
                     Logout
                 </button>
             </div>
+            <ToastContainer position="top-right" autoClose={3000} />
         </div>
     );
 };

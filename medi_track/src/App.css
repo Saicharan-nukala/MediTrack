@@ -413,9 +413,23 @@ background-color: #ccece8;
 }
 
 .appointmentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* aligns content to top for multiline notes */
   padding: 10px;
   border-bottom: 1px solid #eee;
+  gap: 10px;
 }
+
+.appointmentItem > div {
+  flex: 1; /* evenly space items */
+  min-width: 0; /* prevents overflow */
+}
+
+.viewReportButton {
+  white-space: nowrap; /* prevents text wrap */
+}
+
 
 /* Doctor - Appointment */
 .appointmentmain

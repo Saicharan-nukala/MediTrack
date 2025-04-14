@@ -77,7 +77,6 @@ const Patients = () => {
                   {appointments.map((appt) => (
                     <li key={appt._id} className="appointmentItem">
                       <p><strong>Date:</strong> {new Date(appt.currentAppointmentDate).toLocaleDateString()}</p>
-                      <p><strong>Status:</strong> {appt.isActive ? "Active" : "Completed"}</p>
                       <p><strong>Notes:</strong> {appt.notes || "No notes"}</p>
                       {appt.isReportGenerated && appt.pdfReport?.file ? (
                         <button

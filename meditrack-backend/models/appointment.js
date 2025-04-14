@@ -186,7 +186,6 @@ appointmentSchema.post("remove", async function (doc, next) {
   }
 });
 
-// Add this middleware to handle PDF uploads
 appointmentSchema.pre('save', async function(next) {
   if (this.isModified('pdfReport.file') && this.pdfReport?.file) {
     try {
@@ -199,6 +198,14 @@ appointmentSchema.pre('save', async function(next) {
       this.isReportGenerated = true;
       this.isActive = false;
       this.pdfReport.uploadedAt = new Date();
+
+      // 3. Update patient's activeAppointment to null if this was their active appointment
+      const patient = await Patient.findById(this.patient);
+      if (patient && patient.activeAppointment && patient.activeAppointment.equals(this._id)) {
+        await Patient.findByIdAndUpdate(this.patient, {
+          $set: { activeAppointment: null }
+        });
+      }
 
       next();
     } catch (err) {

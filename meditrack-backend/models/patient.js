@@ -21,7 +21,7 @@ const patientSchema = new mongoose.Schema({
 
   isNew: {
     type: Boolean,
-    default: false
+    default: true
   },
   activeAppointment: {
     type: mongoose.Schema.Types.ObjectId,
