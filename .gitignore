@@ -13,3 +13,5 @@ out/
 # Ignore system files
 .DS_Store
 Thumbs.db
+
+meditrack-backend/
