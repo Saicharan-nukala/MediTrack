@@ -7,6 +7,7 @@
 }
 body {
   position: relative; /* Ensures child elements respect the viewport */
+  width: 100vw;
 }
 /* Logo styling */
 /* Logo styling */

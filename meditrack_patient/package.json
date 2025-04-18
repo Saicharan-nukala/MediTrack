@@ -1,0 +1,26 @@
+{
+  "name": "meditrack-patients",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "compression": "^1.8.0",
+    "express": "^5.0.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^6.0.0",
+    "react-toastify": "^11.0.5",
+    "sirv": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "cross-env": "^7.0.3",
+    "vite": "^6.1.1"
+  }
+}
