@@ -3,7 +3,7 @@ import { useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { useLocation } from "react-router-dom";
-import { fetchDoctorDetails } from "../apiService";
+import { fetchDoctorDetails} from "../../apiService";
 import './PatientReportForm.css';
 const PatientReportForm = () => {
   const location = useLocation();

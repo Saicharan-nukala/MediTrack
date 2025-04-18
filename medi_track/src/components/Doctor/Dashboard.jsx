@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { fetchDoctorPatients } from "../apiService";
-import { fetchDoctorDetails } from "../apiService";
-import { getNewPatientsByDoctor,getActiveAppointmentsByDoctor,getPendingReportAppointmentsByDoctor} from "../apiService";
+import { fetchDoctorPatients } from "../../apiService";
+import { fetchDoctorDetails } from "../../apiService";
+import { getNewPatientsByDoctor,getActiveAppointmentsByDoctor,getPendingReportAppointmentsByDoctor} from "../../apiService";
 const Dashboard = () => {
   const [patients, setPatients] = useState([]);
   const doctorId = localStorage.getItem("doctorId"); // Your actual doctor ID
@@ -135,7 +135,7 @@ const Dashboard = () => {
                 <ul>
                   {newPatients.map((patient) => (
                     <li
-                      key={patient.id}
+                    key={patient.id}
                       className={`today-patient-item`}
                     >
                       {patient.name}

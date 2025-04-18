@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchDoctorPatients, getAllAppointmentsByPatient } from "../apiService";
-
+import { fetchDoctorPatients, getAllAppointmentsByPatient } from "../../apiService";
 const Patients = () => {
   const [selectedPatient, setSelectedPatient] = useState(null);
   const doctorId = localStorage.getItem("doctorId"); // Your actual doctor ID

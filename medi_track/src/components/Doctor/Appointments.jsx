@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getNewPatientsByDoctor } from "../apiService";
-import { getActiveAppointmentPatientsByDoctor } from "../apiService";
+import { getNewPatientsByDoctor } from "../../apiService";
+import { getActiveAppointmentPatientsByDoctor } from "../../apiService";
 const filterAppointmentsByDate = (patients, startDate, endDate) => {
   return patients.filter((patient) => {
     const lastAppointment = patient.lastAppointment ? new Date(patient.lastAppointment) : null;

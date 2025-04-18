@@ -1,8 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import DoctorMain from './components/DoctorMain';
-import Footer from './components/Footer';
-import Login from './components/Login';
+import DoctorMain from './components/Doctor/DoctorMain';
+import Footer from './components/Doctor/Footer';
+import Login from './components/Doctor/Login';
 
 function App() {
   const doctorToken = localStorage.getItem("doctorToken");

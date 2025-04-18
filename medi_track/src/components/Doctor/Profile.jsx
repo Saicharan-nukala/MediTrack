@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchDoctorDetails, updateDoctorDetails } from "../apiService";
 import { useNavigate } from "react-router-dom";
+import { fetchDoctorDetails ,updateDoctorDetails} from "../../apiService";
 import { toast, ToastContainer } from "react-toastify";
 
 const Profile = () => {
