@@ -81,16 +81,24 @@ router.get("/:doctorId", async (req, res) => {
   }
 });
 
-// PUT route in doctorRoute.js
 router.put("/:doctorId", async (req, res) => {
   try {
-    const updated = await Doctor.findByIdAndUpdate(req.params.doctorId, req.body, {
-      new: true,
-    });
-    if (!updated) {
+    const doctor = await Doctor.findById(req.params.doctorId);
+    if (!doctor) {
       return res.status(404).json({ message: "Doctor not found" });
     }
-    res.json(updated);
+
+    // Update fields manually (excluding password unless explicitly changed)
+    const { password, ...updates } = req.body;
+    Object.assign(doctor, updates);
+
+    // Only update password if it was explicitly sent
+    if (password) {
+      doctor.password = password; // Will be hashed by pre('save') middleware
+    }
+
+    await doctor.save(); // ✅ Triggers password hashing middleware
+    res.json(doctor);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

@@ -88,7 +88,6 @@ const Patients = () => {
                       ) : (
                         <p><em>No Report Available</em></p>
                       )}
-                      <hr />
                     </li>
                   ))}
                 </ul>

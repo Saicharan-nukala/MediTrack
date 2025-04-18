@@ -5,6 +5,9 @@
   padding: 0;
   font-family: 'Poppins',sans-serif;
 }
+body {
+  position: relative; /* Ensures child elements respect the viewport */
+}
 /* Logo styling */
 /* Logo styling */
 .logonav {
@@ -307,7 +310,8 @@ background-color: #ccece8;
   width: 7vw;
   border: none;
   border-radius: 5px;
-  background-color: rgb(200, 200, 200);
+  background-color: rgb(100, 156, 172);
+  color: white;
 }
 .viewehrbtn:hover{
   cursor: pointer;
@@ -401,9 +405,9 @@ background-color: #ccece8;
   overflow-y: auto;
   padding-right: 10px;
   margin-top: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccece8;
   border-radius: 8px;
-  background: #fff;
+  background: white;
 }
 
 .appointmentsList {
@@ -413,21 +417,17 @@ background-color: #ccece8;
 }
 
 .appointmentItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start; /* aligns content to top for multiline notes */
-  padding: 10px;
-  border-bottom: 1px solid #eee;
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr 0.8fr; /* Adjust column widths */
+  align-items: center;
+  padding: 2vh;
+  border-bottom: 1px solid #ccece8;
   gap: 10px;
-}
-
-.appointmentItem > div {
-  flex: 1; /* evenly space items */
-  min-width: 0; /* prevents overflow */
 }
 
 .viewReportButton {
   white-space: nowrap; /* prevents text wrap */
+  
 }
 
 
