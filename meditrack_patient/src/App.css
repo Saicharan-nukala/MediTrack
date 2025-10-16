@@ -1,5 +1,6 @@
 /* App.css or index.css */
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 body, html {
   margin: 0;
   padding: 0;
@@ -172,7 +173,6 @@ input{
   height: 220px;
   z-index: 5;
 }
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 body {
   height: 100vh;
   display: flex;
@@ -463,7 +463,6 @@ form .button input:hover {
 .dashheading {
   color: #649cac;
 }
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 
 

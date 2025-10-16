@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboardpatient';
-import PatientFirst from './components/patientfirst';
+import PatientFirst from './components/PatientFirst';
 import NavBar from './components/Navbarpatient';
 import Appointmentspatient from './components/Appointmentspatient';
 import { ToastContainer } from 'react-toastify';

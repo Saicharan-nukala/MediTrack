@@ -1,5 +1,4 @@
-const API_URL = 'http://localhost:5000';
-
+const API_URL = 'https://meditrack-backend-e06w.onrender.com';
 // Helper function to handle API responses
 const handleResponse = async (response) => {
   const contentType = response.headers.get('content-type');
