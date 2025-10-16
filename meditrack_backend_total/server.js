@@ -9,7 +9,7 @@ const app = express();
 
 // CORS fix for frontend (adjust origin if deployed)
 app.use(cors({
-  origin: ['http://localhost:3001', 'http://localhost:5173' , 'https://medi-track-doctor.vercel.app'],
+  origin: ['http://localhost:3001', 'http://localhost:5173' , 'https://medi-track-doctor.vercel.app','https://meditrackpatients.vercel.app'],
   credentials: true,
 }));
 
