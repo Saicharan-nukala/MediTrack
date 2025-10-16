@@ -5,11 +5,9 @@ import SimpleNavBar from "./SimpleNavBar";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userType, setUserType] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    if (userType === "doctor") {
       try {
         const res = await axios.post("https://meditrack-backend-e06w.onrender.com/api/doctors/login", {
           email,
@@ -25,9 +23,6 @@ const Login = () => {
       } catch (err) {
         alert("Login failed. Invalid credentials.",err);
       }
-    } else {
-      alert("Select Doctor login or handle other roles.");
-    }
   };
 
   return (
@@ -54,15 +49,7 @@ const Login = () => {
               <input type="password" placeholder='example123' value={password}
                 onChange={(e) => setPassword(e.target.value)} />
             </div>
-            <div>
-              <label>User</label>
-              <select value={userType} onChange={(e) => setUserType(e.target.value)}>
-                <option> --- Select User ---- </option>
-                <option value="patient">Patient</option>
-                <option value="doctor">Doctor</option>
-                <option value="admin">Admin</option>
-              </select>
-            </div>
+    
           </div>
           <div>
             <button className='loginbtn' onClick={handleLogin}><b>Login</b></button>
