@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5000/api"; // Adjust if needed
+const API_BASE_URL = "https://meditrack-backend-e06w.onrender.com/api"; // Adjust if needed
 
 // ✅ Fetch all patients for a specific doctor
 export const fetchDoctorPatients = async (doctorId) => {
@@ -191,7 +191,7 @@ export const uploadPdfReport = async (appointmentId, file) => {
 };
 export const getAllAppointmentsByPatient = async (patientId) => {
   try {
-    const response = await axios.get(`http://localhost:5000/api/appointments/patient/${patientId}`);
+    const response = await axios.get(`https://meditrack-backend-e06w.onrender.com/api/appointments/patient/${patientId}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching appointments for patient:", error.response?.data || error.message);

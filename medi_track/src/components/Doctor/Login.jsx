@@ -11,7 +11,7 @@ const Login = () => {
   const handleLogin = async () => {
     if (userType === "doctor") {
       try {
-        const res = await axios.post("http://localhost:5000/api/doctors/login", {
+        const res = await axios.post("https://meditrack-backend-e06w.onrender.com/api/doctors/login", {
           email,
           password,
         });

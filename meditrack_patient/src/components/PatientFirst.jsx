@@ -111,13 +111,13 @@ import { useNavigate } from 'react-router-dom';
             <div className='vertical-line'></div>
             <div className='center-buttons'>
                 <button className='btn' onMouseEnter={handleMouseEnterNew} onMouseLeave={handleMouseLeaveNew}>
-                    New Patient
+                    New Patient Sign Up
                 </button>
                 {showNewForm && (
                     <div className='hover-bridge' onMouseEnter={handleMouseEnterNew} onMouseLeave={handleMouseLeaveNew} />
                 )}
                 <button className='btn' onMouseEnter={handleMouseEnterOld} onMouseLeave={handleMouseLeaveOld}>
-                    Old Patient
+                    Login
                 </button>
                 {showOldForm && (
                     <div className='hover-bridge left-hover' onMouseEnter={handleMouseEnterOld} onMouseLeave={handleMouseLeaveOld} />
@@ -154,7 +154,7 @@ import { useNavigate } from 'react-router-dom';
             {showOldForm && (
                 <div className='form-container old-patient-form' onMouseEnter={handleMouseEnterOld} onMouseLeave={handleMouseLeaveOld}>
                     <div className="old-patient-container">
-                        <div className="title">Old Patient Login</div>
+                        <div className="title">Login</div>
                         <div className="content">
                             <form onSubmit={handleLogin}>
                                 <div className="user-details">
