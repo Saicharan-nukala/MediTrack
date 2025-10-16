@@ -54,7 +54,7 @@ The app uses **JWT-based authentication**, supports **PDF generation using `jspd
 | Database   | MongoDB             |
 | PDF Tools  | `jspdf`, `html2canvas` |
 | Auth       | JSON Web Tokens (JWT) |
-| Styling    | [Your styling tech] |
+| Styling    | Manual CSS |
 
 ---
 
